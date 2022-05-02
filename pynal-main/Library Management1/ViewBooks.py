@@ -3,6 +3,7 @@ from PIL import Image, ImageTk
 from tkinter import messagebox
 import sqlite3
 from sqlite3 import Error
+import re
 
 def create_connection(db_file):
     """ create a database connection to the SQLite database

@@ -19,6 +19,10 @@ def bookRegister():
     try:
         cur.execute(insertBooks)
         con.commit()
+        if status == "issued":
+            addIssuedBook = "insert into " + issueTable + "(bid) values ('" + bid + "')"
+            cur.execute(addIssuedBook)
+            con.commit()
         messagebox.showinfo('Success', "Book added successfully")
     except:
         messagebox.showinfo('Error', "Can't add book to database")
@@ -26,7 +30,7 @@ def bookRegister():
     root.destroy()
 
 def addBook():
-    global book_id, book_title, book_author, book_status, Canvas1, cur, con, bookTable, root
+    global book_id, book_title, book_author, book_status, Canvas1, cur, con, bookTable, root,issueTable
 
     root = Tk()
     root.title("Add Book")
@@ -47,6 +51,7 @@ def addBook():
     cur = con.cursor()
 
     bookTable = "books"
+    issueTable = "books_issued"
 
     #create the canvas for info
     Canvas1 = Canvas(root)

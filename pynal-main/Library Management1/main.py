@@ -24,7 +24,7 @@ create_connection(r"library.db")
 
 
 root = Tk()
-root.title("Library")
+root.title("Dashboard")
 root.minsize(width=600, height=500)
 root.geometry("600x500")
 
@@ -65,7 +65,7 @@ btn5.place(relx=0.2, rely=0.55, relwidth=0.6, relheight=0.1)
 btn6 = Button(root, text="Search Book", bg="black", fg="white", command=search)
 btn6.place(relx=0.2, rely=0.65, relwidth=0.6, relheight=0.1)
 
-btn7 = Button(root, text="Show Member Info", bg="black", fg="white", command=ViewMem)
+btn7 = Button(root, text="Show Issue/Return Log", bg="black", fg="white", command=ViewMem)
 btn7.place(relx=0.2, rely=0.75, relwidth=0.6, relheight=0.1)
 
 root.mainloop()
