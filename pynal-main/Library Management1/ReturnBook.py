@@ -5,11 +5,6 @@ import sqlite3
 from sqlite3 import Error
 
 def create_connection(db_file):
-    """ create a database connection to the SQLite database
-        specified by the db_file
-    :param db_file: database file
-    :return: Connection object or None
-    """
     conn = None
     try:
         conn = sqlite3.connect(db_file)
@@ -20,7 +15,6 @@ def create_connection(db_file):
 con = create_connection(r"library.db")
 cur = con.cursor()
 
-#enter the table names
 issueTable = "books_issued"
 bookTable = "books"
 member="memberInfo"
@@ -28,9 +22,9 @@ member="memberInfo"
 allBid = []
 
 def Return():
-    global submitBtn, quitBtn, LabelFrame, lb1, Canvas1, bookInfo1, root, status
+    global submitBtn, quitBtn, LabelFrame, lb1, Canvas1, book_id, root, status
 
-    bid = bookInfo1.get()
+    bid = book_id.get()
     extractBid = "select bid from "+issueTable
 
     try:
@@ -76,13 +70,11 @@ def Return():
             cur.execute(checkFine)
             con.commit()
             messagebox.showinfo('Success', "Book returned successfully")
-
         else:
             allBid.clear()
             messagebox.showinfo('Message', "Please check the book id")
             root.destroy()
             return
-
     except:
         messagebox.showinfo("Search Error", "the value you entered is wrong, try again!")
 
@@ -90,32 +82,32 @@ def Return():
     root.destroy()    
 
 def returnBook():
-    global root, con, cur, labelFrame, submitBtn, quitBtn, Canvas1, bookInfo1, lb1
+    global root, con, cur, labelFrame, submitBtn, quitBtn, Canvas1, book_id, lb1
 
     root = Tk()
     root.title("Return Book")
-    root.minsize(width=400, height=400)
-    root.geometry("600x500")
+    root.minsize(width=400, height=200)
+    root.geometry("500x300")
 
     Canvas1 = Canvas(root)
-    Canvas1.config(bg="cyan")
+    Canvas1.config(bg="#5F9EA0")
     Canvas1.pack(expand=True, fill=BOTH)
 
     labelFrame = Frame(root, bg="black")
-    labelFrame.place(relx=0.1, rely=0.3, relwidth=0.8, relheight=0.5)
+    labelFrame.place(relx=0.1, rely=0.2, relwidth=0.8, relheight=0.5)
 
     #book id
-    lb1 = Label(labelFrame, text="Book Id", bg="black", fg="white")
+    lb1 = Label(labelFrame, text="Book ID", bg="black", fg="white")
     lb1.place(relx=0.05, rely=0.5)
 
-    bookInfo1 = Entry(labelFrame)
-    bookInfo1.place(relx=0.3, rely=0.5, relwidth=0.62)
+    book_id = Entry(labelFrame)
+    book_id.place(relx=0.3, rely=0.5, relwidth=0.62)
 
     #submit Button
     submitBtn = Button(root, text="Submit", bg="lightblue", fg="black", command=Return)
-    submitBtn.place(relx=0.28, rely=0.9, relwidth=0.18, relheight=0.08)
+    submitBtn.place(relx=0.28, rely=0.8, relwidth=0.18, relheight=0.08)
 
     quitBtn = Button(root, text="Close", bg="lightblue", fg="black", command=root.destroy)
-    quitBtn.place(relx=0.53, rely=0.9, relwidth=0.18, relheight=0.08)
+    quitBtn.place(relx=0.53, rely=0.8, relwidth=0.18, relheight=0.08)
 
     root.mainloop()

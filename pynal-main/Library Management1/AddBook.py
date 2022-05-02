@@ -50,7 +50,7 @@ def addBook():
 
     #create the canvas for info
     Canvas1 = Canvas(root)
-    Canvas1.config(bg="#ff6e40")
+    Canvas1.config(bg="#5F9EA0")
     Canvas1.pack(expand=True, fill=BOTH)
 
     LabelFrame = Frame(root, bg="black")
