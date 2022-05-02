@@ -25,7 +25,7 @@ def bookRegister():
             con.commit()
         messagebox.showinfo('Success', "Book added successfully")
     except:
-        messagebox.showinfo('Error', "Can't add book to database")
+        messagebox.showinfo('Error', "Invalid or duplicated ID")
 
     root.destroy()
 
